@@ -1,0 +1,157 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<hr>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    /* Hero Section */
+    .hero {
+        background-image: url("{% static 'images/hero-background.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        padding: 70px 0;
+        text-align: center;
+        color: #ffff0h;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+        margin-top: -10px;
+        margin-bottom: 30px;
+    }
+
+    .hero form {
+        display: inline;
+    }
+
+    .hero input[type="text"],
+    .hero button[type="submit"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+        text-align:center;
+    }
+
+    .hero input[type="text"] {
+        width: 500px;
+        margin-right: 0;
+    }
+
+    .hero button[type="submit"] {
+        background-color: #055698;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .hero button[type="submit"]:hover {
+        background-color: #034671;
+    }
+
+    /* Job Card Styles */
+    .card {
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        transition: box-shadow 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #055698;
+        color: white;
+        border-radius: 25px 25px 0 0;
+        padding: 10px 0;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .card-body {
+        padding: 15px;
+        text-align: left;
+    }
+
+
+    .card-text {
+        margin-bottom: 5px;
+        color: #6c757d;
+        font-size: 16px;
+    }
+
+    .card-footer {
+        border-top: none;
+        border-radius: 0 0 25px 25px;
+        background-color: #f9f9f9;
+        padding: 5px 0;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #fff;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
+
+<section class="hero">
+    <div>
+        <h1>Find Your Dream Job Today!</h1>
+        <form>
+            <input type="text" placeholder="Job title, company, or location">
+            <button type="submit">Search Jobs</button>
+        </form>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        {% for job in latest_jobs %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-header" style="background-color:#055698; color: white">
+                    <h5 class="card-title text-center mb-0">{{ job.title }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Company:</strong> {{ job.recruiter_user.company }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+                    <p class="card-text"><strong>Start Date:</strong> {{ job.start_date }}</p>
+                    <p class="card-text"><strong>End Date:</strong> {{ job.end_date }}</p>
+                </div>
+                {% if job.id in li %}
+                <div class="card-footer text-center">
+                    Applied
+                </div>
+                {% else %}
+                <div class="card-footer text-center">
+                    <a href="{% url 'job_detail' job.id  %}" class="btn btn-success btn-sm">  Apply</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

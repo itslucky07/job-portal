@@ -1,0 +1,35 @@
+{% load static %}
+
+<footer class="bg-dark text-white py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p>At our job portal, we are dedicated to helping job seekers find their dream careers and assisting employers in finding the perfect candidates to join their teams..</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'latest_job' %}">Latest Jobs</a></li>
+                    <li><a href="{% url 'user_login' %}">User Login</a></li>
+                    <li><a href="{% url 'recruiter_login' %}">Recruiter Login</a></li>
+                    <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <address>
+                    123 Main Street<br>
+                    City, State 12345<br>
+                    Phone: (123) 456-7890<br>
+                    Email: info@example.com
+                </address>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-1">
+        <p>&copy; 2024 Job Portal. All rights reserved.</p>
+    </div>
+</footer>

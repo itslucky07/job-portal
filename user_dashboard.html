@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user_dashboard</title>
+    <!-- Add your CSS and other head content here -->
+    <style>
+        .profile-image {
+            width: 200px; /* Adjust width as needed */
+            height: 300px; /* Adjust height as needed */
+            object-fit: cover;
+            border-radius: 20%; /* Adjust border-radius as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 mt-5">
+                <div class="card">
+                    <img src="{{ student.image.url }}" class="card-img-top img-fluid profile-image" alt="User Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ student.user.first_name }} {{ student.user.last_name }}</h5>
+                        <p class="card-text">{{ student.user.username }}</p>
+                        <p class="card-text">Contact: {{ student.mobile }}</p>
+                        <p class="card-text">Gender: {{ student.gender }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add your scripts and other body content here -->
+</body>
+</html>

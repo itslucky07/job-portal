@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        /* Add your CSS styling for the resume here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        .profile img {
+            max-width: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .profile h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            word-wrap: break-word;
+        }
+        .profile p {
+            margin: 5px 0;
+            color: #666;
+            word-wrap: break-word;
+        }
+        .section {
+            margin-bottom: 30px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .section p {
+            margin: 5px 0;
+            color: #333;
+            word-wrap: break-word;
+        }
+        .section label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .section hr {
+            border-top: 1px solid #ccc;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .resume-item {
+            text-align: justify;
+        }
+        #printButton {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #printButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <div>
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <p>{{ user.username }}</p>
+                <p>{{ student_user.mobile }}</p>
+                <p>{{ resume.location }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Resume Information</h2>
+            <hr>
+            <div class="resume-item">
+                <label>Description:</label>
+                <p>{{ resume.description }}</p>
+            </div>
+            <div class="resume-item">
+                <label>Experience:</label>
+                <p>{{ resume.experience }}</p>
+            </div>
+            <div class="resume-item">
+                <label>Skills:</label>
+                <p>{{ resume.skills }}</p>
+            </div>
+            <div class="resume-item">
+                <label>Project:</label>
+                <p>{{ resume.project }}</p>
+            </div>
+        </div>
+        
+        <button id="printButton">Print PDF</button>
+    </div>
+
+    <script>
+    // Add event listener to print button
+    document.getElementById('printButton').addEventListener('click', function() {
+        window.print();
+    });
+    </script>
+</body>
+</html>

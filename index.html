@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placed Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation Styling */
+        /* Add your navigation styling here */
+
+        /* Hero Image Styling */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            max-height: 600px;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            filter: blur(1px);
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+        }
+
+        .hero-container:hover .hero-image {
+            filter: blur(0); /* Clear the blur on hover */
+        }
+
+        /* Optional: Add a transition for smoother hover effect */
+        .hero-container:hover .hero-image {
+            transition-duration: 0.3s;
+        }
+
+        .hero-image:hover {
+            transform: scale(0.75);
+            /* Adjust the blur radius as needed */
+            filter: blur(2px); 
+        }
+
+        /* Hero Text Styling */
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            color: white;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 20px; /* Position the text at the top */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1;
+            color: white;
+            width: 100%; /* Make sure the text spans the full width */
+            padding-top: 90px; /* Add padding to give some space from the top */
+        }
+
+        .hero-text h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        /* Placed Students Section Styling */
+        .section-title {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #343a40;
+        }
+
+        .company-card {
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .company-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px 20px 0 0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .company-card .content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 0 0 20px 20px;
+            color: #fff;
+            text-align: center;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .company-card:hover .content {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+             
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    {% include 'navigation.html' %}
+
+   <!-- Hero Image -->
+   <div class="hero-container">
+    <img src="{% static 'images/1.jpg' %}" class="hero-image">
+    <div class="hero-text">
+        <h1>Welcome to Job Portal</h1>
+    </div>
+</div>
+
+<!-- Latest Job Cards -->
+{% comment %} {% include 'filter3.html' %} {% endcomment %}
+
+<!-- Placed Students Section -->
+<div class="container">
+    <h1 class="section-title">OUR PLACED STUDENTS</h1>
+
+    <div class="row">
+        <!-- Company Cards -->
+        <div class="col-md-3">
+            <div class="company-card">
+                <img src="{% static 'images/1.jpg' %}">
+                <div class="content">
+                    <p>Facebook</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add more company cards as needed -->
+    </div>
+</div>
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+{% comment %} <marquee style="font-family:Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
+    Recruiter Login
+</marquee> {% endcomment %}
+
+<style>
+    body{
+        background-color: 	#6381a1;
+    }
+    .login-card {
+        background-color: rgba(249, 249, 249, 0.01); /* 99% transparent white */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: box-shadow 0.3s ease;
+    }
+    
+    
+
+    .card-title {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .login-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        border: 1px solid #007bff;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    
+    .btn-block {
+        width: 100%;
+    }
+
+    /* Portrait orientation for form */
+    @media (min-width: 576px) {
+        .login-card {
+            max-width: 400px; /* Adjust the width as needed */
+            margin: auto;
+        }
+    }
+
+    
+    .row h1{
+        padding-top:75px;
+        text-align:center;
+        padding-right:105px;
+    }
+
+    .row p{
+        text-align:justify;
+        font-size:20px;
+    }
+    /* Add more custom styles and animations as needed */
+    
+</style>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Left side - Text content -->
+            <div class="col-md-6">
+                <div class="card login-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recruiter Login</h5>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email" class="form-label"><b>Email ID</b></label>
+                                <input type="email" class="form-control" id="email" name="username" placeholder="Enter email ID">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="form-label"><b>Password</b></label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                        <hr>
+                        <p class="text-center"> <h6>Don't have an account? <a href="{% url 'recruiter_signup' %}">Create Account</a>  </h6></p>
+                        {% if error == "yes" %}
+                        <div class="alert alert-danger mt-3" role="alert">
+                            Invalid login credentials. Please try again.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Right side - Login form -->
+            <div class="col-md-6">
+                <h1 class="display-6 fw-bold lh-1 mb-"style="color: white;">Welcome, Recruiter!</h1>
+                <p class="col-md-10 fs-4" style="color: white;">
+                    Thank you for choosing our website for your recruitment needs. We strive to provide the best platform for connecting recruiters with talented individuals.
+    
+                    If you don't have an account yet, you can create one by clicking the "Create account" button below.
+                </p>
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+<br>
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Login successful");
+    window.location=('{% url 'recruiter_home' %}')
+</script>
+{% endif %}
+
+{% endblock %}

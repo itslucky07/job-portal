@@ -1,0 +1,67 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+
+<marquee style="font-family: Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
+    Manage Job Details
+</marquee>
+
+<style>
+    /* Custom table styles */
+    .custom-table {
+        background-color: #f8f9fa; /* Background color of the table */
+        border: 1px solid #dee2e6; /* Border color */
+        border-radius: 10px; /* Border radius */
+        margin-top: 20px; /* Added margin for spacing */
+    }
+    
+    .table-header {
+        background-color: #055698; /* Background color of the table header */
+        color: white; /* Text color of the table header */
+    }
+    
+    .table-row {
+        background-color: #EEB888; /* Background color of the table rows */
+        color: black; /* Text color of the table rows */
+    }
+    
+    .table-row:hover {
+        background-color: #ECB48C; /* Background color of the table rows on hover */
+    }
+
+    /* Adjust button styles */
+    .btn {
+        margin: 2px; /* Added margin for spacing between buttons */
+    }
+</style>
+<hr>
+<div class="container">
+    <table class="table table-hover custom-table" id="example">
+        <thead>
+            <tr class="table-header">
+                <th class="text-center">Sr.No</th>
+                <th class="text-center">Job Title</th>
+                <th class="text-center">Creation Date</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for job in jobs %}
+            <tr class="table-row">
+                <td class="text-center">{{ forloop.counter }}</td>
+                <td class="text-center">{{ job.title }}</td>
+                <td class="text-center">{{ job.creationdate }}</td>
+                <td class="text-center">
+                    <a href="{% url 'edit_jobdetails' job.id %}" class="btn btn-success btn-sm">Edit</a>
+                    <a href="{% url 'delete_job' job.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you Sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

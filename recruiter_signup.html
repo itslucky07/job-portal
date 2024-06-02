@@ -1,0 +1,144 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+<script>
+    function checkpass(){
+        if(document.signup.password.value != document.signup.cpassword.value){
+            alert("Password and confirm password don't match");
+            document.signup.cpassword.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<style>
+    /* Custom CSS for Signup Form */
+    .container {
+        margin-bottom: 50px; /* Add gap between form and footer */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Add space between form fields */
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+
+<marquee style="font-family:Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
+    Recruiter Sign Up
+</marquee>
+<hr>
+
+
+<div class="container mt-5">
+    <form name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();" style="background-color: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First Name" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Last Name" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Contact No" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" class="form-control" id="company" name="company" placeholder="Enter Your Company Name" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email Id</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number"  required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <div class="form-check">
+                        <input type="radio" id="male" name="gender" class="form-check-input" value="Male">
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="female" name="gender" class="form-check-input" value="Female">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+    <script>
+        alert("Signup successful");
+        window.location='{% url 'recruiter_login' %}'
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+{% endif %}
+
+{% endblock %}

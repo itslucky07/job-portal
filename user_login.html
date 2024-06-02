@@ -1,0 +1,122 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+ 
+<style>
+    .conbg {
+        background-color:	#6381a1;
+    }
+    .title1{
+        color: white;
+        font-size: 50px;
+        font-weight: 700;
+        font-family: Arial;
+        margin-left: 30px; /* Adjust as needed */
+    }
+
+    .login-card {
+        padding: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-control {
+        border-radius: 5px;
+        height: 50px;
+        border: 1px solid #ccc;
+    }
+    
+    .btn-primary {
+        background-color: rgba(0, 0, 0, 0.692);
+        border: 1px solid #007bff;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    
+    .btn-block {
+        width: 100%;
+    }
+
+    /* Portrait orientation for form */
+    @media (min-width: 576px) {
+        .login-card {
+            max-width: 500px; /* Adjust the width as needed */
+            margin: auto;
+        }
+    }
+
+    .row h1{
+        padding-top:75px;
+        text-align:center;
+        padding-right:105px;
+    }
+
+    .row p{
+        text-align:justify;
+        font-size:20px;
+    }
+    .img-fluid{
+        margin-top: 200px;
+        
+
+    }
+    
+    
+</style>
+<div class="conbg">
+    <div class="row">
+        <!-- Left side - Text content -->
+        <div class="col-md-6">
+            <h1 class="title1">Welcome to Job Portal</h1>
+            <div class="login-card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="email" class="form-label"><b>Email ID</b></label>
+                            <input type="email" class="form-control" id="email" name="username" placeholder="Enter email ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label"><b>Password</b></label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                    <hr>
+                    <p class="text-center" style="color: white;">
+                        <h6>Don't have an account? <a href="{% url 'user_signup' %}" style="color: white;">Create Account</a></h6>
+                    </p>
+                                        {% if error == "yes" %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        Invalid login credentials. Please try again.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Right side - Image -->
+        <div class="col-md-6">
+            <img src="{% static 'img/laptop.png' %}" alt="Image" class="img-fluid">
+        </div>
+    </div>
+    
+    <br>
+    
+</div>
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Login successful");
+    window.location=('{% url 'user_filter' %}')
+</script>
+{% endif %}
+
+{% endblock %}

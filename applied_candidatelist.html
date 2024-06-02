@@ -1,0 +1,80 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+    <style>
+        /* Custom CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #055698;
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        th {
+            background-color: #055698;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        a {
+            text-decoration: none;
+            color: #055698;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #f44336;
+        }
+    </style>
+
+<h1>Applied Candidates List</h1>
+<hr>
+<div class="container">
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr>
+                <th>Sr. No</th>
+                <th>Full Name</th>
+                <th>Email Id</th>
+                <th>Contact No</th>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>Apply Date</th>
+                <th>Resume</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ student.student.user.first_name }} {{ student.student.user.last_name }}</td>
+                <td>{{ student.student.user.username }}</td>
+                <td>{{ student.student.mobile }}</td>
+                <td>{{ student.job.recruiter_user.company }}</td>
+                <td>{{ student.job.title }}</td>
+                <td>{{ student.applydate }}</td>
+                <td><a href="{{ student.resume.url }}">Download Resume</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

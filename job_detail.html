@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .job-company {
+            color: #6c757d;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .job-location,
+        .job-date {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .job-info {
+            margin-bottom: 20px;
+        }
+
+        .job-salary {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .apply-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .apply-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .job-details {
+            margin-top: 30px;
+        }
+
+        .job-details h4 {
+            color: #007bff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .job-details pre {
+            color: #555;
+            margin-bottom: 20px;
+            white-space: pre-wrap; /* Allow text to wrap */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .job-title {
+                font-size: 20px;
+            }
+            .job-company {
+                font-size: 16px;
+            }
+            .job-location,
+            .job-date {
+                font-size: 14px;
+            }
+            .job-salary {
+                font-size: 16px;
+            }
+            .apply-btn {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            .job-details h4 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+{% include 'user_navigation.html' %}
+
+<div class="container">
+    <div class="job-header">
+        <h2 class="job-title">{{ job.title }}</h2>
+        <p class="job-company">{{ job.recruiter.company }} <a href="{% url 'user_latestjob' %}" style="color: #007bff;">(View all jobs)</a></p>
+        <div class="job-info">
+            <p class="job-location"><i class="fas fa-map-marker-alt"></i> {{ job.location }}</p>
+            <p class="job-date"><i class="far fa-calendar-alt"></i> {{ job.creationdate }}</p>
+        </div>
+        <p class="job-salary"><i class="fas fa-money-bill"></i> ₹{{ job.salary }}</p>
+    </div>
+    <button class="apply-btn"><a href="{% url 'apply_job' job.id %}" style="text-decoration: none; color: inherit;">Apply for this Job</a></button>
+    <div class="job-details">
+        <h4>Overview</h4>
+        <pre>{{ job.description }}</pre>
+
+        <h4>Required Experience</h4>
+        <pre>{{ job.experience | linebreaks }}</pre>
+
+        <h4>Skills required</h4>
+        <pre>{{ job.skills | linebreaks }}</pre>
+
+        <h4>Start Date for applying</h4>
+        <pre>{{ job.start_date }}</pre>
+
+        <h4>End Date for applying</h4>
+        <pre>{{ job.end_date }}</pre>
+    </div>
+</div>
+
+</body>
+</html>

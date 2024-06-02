@@ -1,0 +1,165 @@
+{% load static %}
+{% include 'navigation.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Set background color */
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            color: black; /* Set header text color */
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 70px; /* Increased margin for better spacing */
+            text-align: center; /* Center align the content */
+        }
+        h2 {
+            margin-bottom: 50px;
+            color: black; /* Set heading color */
+        }
+        p {
+            color: black; /* Set paragraph text color */
+            line-height: 1.6; /* Improved readability */
+            margin-left: 7%;
+        }
+        ul {
+            list-style-type: none; /* Remove default list style */
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px; /* Improved spacing between list items */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 70px; /* Added border radius for image */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow effect */
+            margin-bottom: 50px; /* Added margin bottom for better spacing */
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f2f2f2;
+            color: #6c757d; /* Set footer text color */
+        }
+        .team-member {
+            display: inline-block;
+            width: 200px; /* Adjust width as needed */
+            margin-right: 11%; /* Add right margin for spacing */
+            text-align: center;
+        }
+        .team-member img {
+            border-radius: 50%; /* Make team member images circular */
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            object-position: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .team-member h3 {
+            margin: 0;
+            color: #007bff;
+        }
+        .team-member p {
+            color: #6c757d;
+            content:justify;
+
+        }
+        .office-gallery {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .office-gallery img {
+            width: calc(25% - 20px); /* Adjust width for responsiveness */
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .office-gallery img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to Our Job Portal</h2>
+            <p>At our job portal, we are dedicated to helping job seekers find their dream careers and assisting employers in finding the perfect candidates to join their teams.</p>
+        </section>
+        <section>
+            <h2>Our Team</h2>
+            <div>
+                <div class="team-member">
+                    <img src="{% static 'images/team/1.jpg' %}" alt="John Doe">
+                    <h3>Lucky Sharma </h3>
+                    <p><strong>CEO </strong></p>
+                    <p >Bringing leadership and vision to the company, Lucky ensures our goals are achieved.</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/team/2.jpg' %}" alt="Jane Smith">
+                    <h3>Asmit Shinde</h3>
+                    <p><b>HR Manager</b></p>
+                    <p> With a keen eye for talent, Asmit ensures our team remains strong and motivated.</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/team/4.jpg' %}" >
+                    <h3>Vishesh Yadav</h3>
+                    <p><b>Lead Developer</b></p>
+                    <p> Sahil leads our development team, turning ideas into reality.</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/team/3.jpg' %}" >
+                    <h3>Sahil Talande</h3>
+                    <p><b>Marketing Specialist</b></p>
+                    <p> Vishesh ensures our brand reaches and resonates with our audience.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Our Office</h2>
+            <p>Take a look inside our modern and collaborative office space:</p>
+            <div class="office-gallery" id="office-gallery">
+                <img src="{% static 'images/team/55.jpeg' %}" alt="Office 1">
+                <img src="{% static 'images/team/11.jpeg' %}" alt="Office 2">
+                <img src="{% static 'images/team/22.jpeg' %}" alt="Office 3">
+                <img src="{% static 'images/team/33.jpeg' %}" alt="Office 4">
+                <img src="{% static 'images/team/44.jpeg' %}" alt="Office 5">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Contact us at: info@jobportal.com</p>
+    </footer>
+
+    <script>
+        // Function to shuffle the office gallery images randomly
+        function shuffleGallery() {
+            var gallery = document.getElementById('office-gallery');
+            for (var i = gallery.children.length; i >= 0; i--) {
+                gallery.appendChild(gallery.children[Math.random() * i | 0]);
+            }
+        }
+        // Call the shuffle function when the page is loaded
+        window.onload = shuffleGallery;
+    </script>
+</body>
+</html>

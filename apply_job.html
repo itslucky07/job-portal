@@ -1,0 +1,112 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-row {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="file"] {
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .alert {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .marquee {
+        font-family: Monospaced;
+        font-size: 25px;
+        color: aliceblue;
+        background-color: black;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="marquee">Apply for Job</div>
+
+<hr>
+
+<div class="container shadow-lg py-3 mb-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="resume">Upload Resume:</label>
+            <input type="file" class="form-control" id="resume" name="resume">
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary mt-3">
+    </form>
+</div>
+
+{% if error == "close" %}
+<div class="alert">
+    Application line is closed. The last date is over.
+</div>
+{% endif %}
+
+{% if error == "done" %}
+<div class="alert">
+    Application Submitted Successfully.
+</div>
+{% endif %}
+
+{% if error == "notopen" %}
+<div class="alert">
+    Application line is closed. Application not started.
+</div>
+{% endif %}
+
+{% endblock %}

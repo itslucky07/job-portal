@@ -1,0 +1,65 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'user_navigation.html' %}
+
+<marquee style="font-family: Monospaced; font-size: 25px; color: rgb(110, 138, 167); background-color: rgb(19, 20, 20); font-weight: bold; margin-top: 1%">
+    Latest Jobs 
+</marquee>
+<hr>
+<div class="container">
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 rounded shadow" style="transition: transform 0.3s ease;">
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <h5 class="card-title text-center mb-3" style="font-size: 20px; color: #055698; text-decoration: none; font-weight: bold; animation: fadeInUp 1s;">{{ job.title }}</h5>
+                    <p class="card-text"><strong>Company:</strong> {{ job.recruiter_user.company }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+                    <p class="card-text"><strong>Start Date:</strong> {{ job.start_date }}</p>
+                    <p class="card-text"><strong>End Date:</strong> {{ job.end_date }}</p>
+                    {% if job.id in li %}
+                    <div class="text-center">
+                        <small>Applied</small>
+                    </div>
+                    {% else %}
+                    <div class="text-center">
+                        <a href="{% url 'job_detail' job.id  %}" class="btn btn-success btn-sm" style="animation: fadeIn 1s;">Apply Now</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+
+body {
+        background-color: #70b1ddb7; /* Navy Blue color */
+        color: #3333db; /* White text color */
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+{% endblock %}

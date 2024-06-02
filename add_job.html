@@ -1,0 +1,86 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiter_navigation.html' %}
+
+<marquee style="font-family: Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
+    Add Job Details
+</marquee>
+<hr>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form class="p-4 rounded" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data" style="background-color: #f8f9fa;">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="jobtitle">Job Title</label>
+                    <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Enter Job Title" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="startdate">Start Date</label>
+                        <input type="date" class="form-control" id="startdate" name="startdate" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="enddate">End Date</label>
+                        <input type="date" class="form-control" id="enddate" name="enddate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="salary">Salary (Per Month)</label>
+                        <input type="text" class="form-control" id="salary" name="salary" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="logo">Company Logo</label>
+                        <input type="file" class="form-control-file" id="logo" name="logo" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="experience">Experience (In Years)</label>
+                        <input type="text" class="form-control" id="experience" name="experience" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="location">Company Location</label>
+                        <input type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills</label>
+                    <textarea class="form-control" id="skills" name="skills" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="background-color: #007bff; border-color: #007bff;">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+
+{% include 'footer.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Job Details have been added successfully");
+    window.location = '{% url 'job_list' %}';
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong. Please try again.");
+</script>
+{% endif %}
+
+{% endblock %}

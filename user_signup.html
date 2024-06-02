@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign Up</title>
+    <!-- Add your CSS links here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Add your custom CSS styles here -->
+    <style>
+        /* Custom styles for the sign-up page */
+        body {
+            background-color: #f8f9fa; /* Set background color */
+            font-family: Arial, sans-serif; /* Set font family */
+        }
+
+        .container {
+            margin-top: 50px; /* Add some space from the top */
+        }
+
+        .form-container {
+            background-color: #fff; /* Form background color */
+            border-radius: 10px; /* Rounded corners for the form */
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+            animation: fadeIn 0.5s ease; /* Fade in animation */
+        }
+
+        .form-label {
+            font-weight: bold; /* Make labels bold */
+            color: #333; /* Set label color */
+        }
+
+        .form-control {
+            border-radius: 5px; /* Rounded corners for input fields */
+            border-color: #ccc; /* Set border color */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Set button background color */
+            border-color: #007bff; /* Set button border color */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker background color on hover */
+        }
+
+        .form-check-input[type="radio"] {
+            margin-right: 5px; /* Add some space between radio button and label */
+        }
+
+        /* Animation for form elements */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    
+    .navbar .container, .navbar .container-fluid, .navbar .container-lg, .navbar .container-md, .navbar .container-sm, .navbar .container-xl {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+    
+    </style>
+</head>
+
+<body>
+
+    {% include 'navigation.html' %}
+
+    <script>
+        function checkpass() {
+            if (document.signup.password.value != document.signup.cpassword.value) {
+                alert("Password and confirm password don't match");
+                document.signup.cpassword.cpwd.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2 class="text-center mb-4">User Sign Up</h2>
+                    <hr>
+                    <form onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="fname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Last Name" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="contact" class="form-label">Contact</label>
+                                <input type="text" class="form-control" name="contact" pattern="[0-9]{10,10}" title="Please enter a 10 digit phone number (0-9)"  id="contact" placeholder="Enter Contact No" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Id</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email Address" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" placeholder="Enter Password" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number"  required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cpassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Gender</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                                    <label class="form-check-label" for="male">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                                    <label class="form-check-label" for="female">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="image" class="form-label">Image</label>
+                                <input type="file" class="form-control" name="image" id="image">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ <br>
+ <br>
+    {% include 'footer.html' %}
+
+    <!-- Your JavaScript code here -->
+
+    {% if error == "no" %}
+    <script>
+        alert("Signup successful");
+        window.location='{% url 'user_login' %}'
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+    {% endif %}
+
+</body>
+
+</html>
